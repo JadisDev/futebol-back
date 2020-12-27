@@ -1,17 +1,7 @@
-import User from '../models/User';
-
+import UserService from '../services/UserService'
 class UserController {
   async store(req, res) {
-    const { login } = req.body;
-    try {
-      if (await User.findOne({ login })) {
-        return res.status(400).json({ error: 'Usuário já existe' });
-      }
-      const user = await User.create(req.body);
-      return res.json({ user });
-    } catch (err) {
-      return res.status(400).json({ error: req.body });
-    }
+    return await UserService.store(req, res);
   }
 }
 

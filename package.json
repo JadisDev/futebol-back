@@ -12,7 +12,8 @@
     "express-async-errors": "^3.1.1",
     "express-handlebars": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.2"
+    "mongoose": "^5.9.2",
+    "validatorjs": "^3.22.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

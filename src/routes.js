@@ -11,9 +11,9 @@ routes.use(corsMiddleware);
 
 routes.get('/api', SessionController.api);
 
-routes.post('/users', UserController.store);
-routes.post('/sessions', SessionController.store);
-routes.post('/validate-token', SessionController.validateToken);
+routes.post('/api/users', UserController.store);
+routes.post('/api/sessions', SessionController.store);
+routes.post('/api/validate-token', SessionController.validateToken);
 
 // Todas as rotas após essa linha terá validações
 routes.use(authMiddleware);
