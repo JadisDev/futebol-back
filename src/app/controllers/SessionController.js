@@ -1,7 +1,5 @@
-import jwt from 'jsonwebtoken';
-import User from '../models/User';
-import authConfig from '../../config/auth';
 import ApiService from '../services/ApiService'
+import SessionService from '../services/SessionService';
 
 class SessionController {
 
@@ -11,26 +9,7 @@ class SessionController {
 
   // responsável por fazer o login do usuário
   async store(req, res) {
-    try {
-      const { login, password } = req.body;
-
-      const user = await User.findOne({ login });
-
-      if (!user) {
-        return res.status(400).json({ error: 'User not found' });
-      }
-
-      if (!(await user.compareHash(password))) {
-        return res.status(400).json({ error: 'Invalid password' });
-      }
-
-      return res.json({
-        user,
-        token: await user.generateToken(),
-      });
-    } catch (err) {
-      return res.status(400).json({ error: 'User authentication failed' });
-    }
+      return await SessionService.store(req.body, res);
   }
 
   async validateToken(req, res) {
