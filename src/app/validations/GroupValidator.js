@@ -6,7 +6,7 @@ class GroupValidator {
 
   async validatorNewGroup(data) {
 
-    const {name_group} = data.body;
+    const {name_group} = data;
 
     console.log(name_group);
 

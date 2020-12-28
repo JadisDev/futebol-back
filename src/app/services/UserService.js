@@ -5,6 +5,8 @@ import { ValidationException } from '../exception/ValidationException';
 import mongoose from 'mongoose';
 import GroupService from './GroupService';
 import GroupUserService from '../services/GroupUserService';
+import SeasonService from '../services/SeasonService';
+import SeasonValidator from '../validations/SeasonValidator';
 
 class UserService {
 
@@ -17,12 +19,17 @@ class UserService {
       session.startTransaction();
 
       await UserValidator.validateNewUser(req.body);
-      await GroupValidator.validatorNewGroup(req);
+      await GroupValidator.validatorNewGroup(req.body);
+      await SeasonValidator.validator(req.body);
 
       const user = new User(req.body);
       const group = await GroupService.store(req);
       await user.save();
-      await GroupUserService.store({user, group});
+      const groupUser = await GroupUserService.store({user, group});
+
+      const {name_season} = req.body;
+      const seasonData = {'group_user': groupUser, 'name_season': name_season}
+      SeasonService.store(seasonData);
 
       await session.commitTransaction();
       session.endSession();

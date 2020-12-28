@@ -9,7 +9,7 @@ class GroupUserService {
     try {
       await GroupUserValidator.validator(data);
       const {user, group} = data;
-      await GroupUser.create({user, group});
+      return await GroupUser.create({user, group});
     } catch (err) {
       throw err;
     }

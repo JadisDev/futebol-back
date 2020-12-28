@@ -1,5 +1,4 @@
 import Group from '../models/Group';
-import GroupValidator from '../validations/GroupValidator';
 
 class GroupService {
 
