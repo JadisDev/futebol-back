@@ -3,7 +3,6 @@ import User from '../models/User';
 import authConfig from '../../config/auth';
 import GroupUser from '../models/GroupUser';
 import Group from '../models/Group';
-import { group } from 'console';
 
 class SessionService {
 
@@ -31,11 +30,16 @@ class SessionService {
         return res.status(400).json({ error: 'Invalid password' });
       }
 
+      const payload = { user, group, groupUser };
+      const options = { expiresIn: authConfig.expiresIn, issuer: 'https://jwt.io/' };
+      const secret = authConfig.secret;
+      const token = jwt.sign(payload, secret, options);
+
       return res.json({
         user,
         group,
         groupUser,
-        token: await user.generateToken(),
+        token: token,
       });
 
     } catch (err) {
