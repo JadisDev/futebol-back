@@ -17,7 +17,10 @@ const GameSchema = new mongoose.Schema(
     date: {
       type: Date,
     },
-    groupUser: mongoose.Schema.Types.ObjectId,
+    groupUser: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "GroupUser"
+    },
     createdAt: {
       type: Date,
       default: Date.now,

@@ -44,6 +44,27 @@ class UserService {
       return res.status(400).json({ error: err.message });
     }
   }
+
+  async storeNormal(req, res) {
+    try {
+
+      const {name_group} = req.body;
+      const group = await GroupValidator.validatorGroupExist(name_group);
+      await UserValidator.validateNewUser(req.body);
+
+      const user = new User(req.body);
+      await user.save();
+      await GroupUserService.store({user, group});
+
+      return res.json(req.body);
+
+    } catch (err) {
+      if (err instanceof ValidationException) {
+        return res.status(400).json({ validation: JSON.parse(err.message) });
+      }
+      return res.status(400).json({ error: err.message });
+    }
+  }
 }
 
 export default new UserService();
