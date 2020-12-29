@@ -2,8 +2,12 @@ import ScoreService from '../services/ScoreService'
 
 class ScoreController {
 
-  async scoreGol(req, res) {
-    return await ScoreService.scoreGol(req, res);
+  async scoreGols(req, res) {
+    return await ScoreService.scoreGols(req, res);
+  }
+
+  async scoreVictories(req, res) {
+    return await ScoreService.scoreVictories(req, res);
   }
 
 }

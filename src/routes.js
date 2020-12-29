@@ -23,6 +23,7 @@ routes.use(authMiddleware);
 routes.post('/api/games', GameController.store);
 
 //scores
-routes.get('/api/score/gols', ScoreController.scoreGol);
+routes.get('/api/score/gols', ScoreController.scoreGols);
+routes.get('/api/score/victories', ScoreController.scoreVictories);
 
 export default routes;
