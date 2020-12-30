@@ -10,6 +10,10 @@ class ScoreController {
     return await ScoreService.scoreVictories(req, res);
   }
 
+  async scoreFrequencies(req, res) {
+    return await ScoreService.scoreFrequency(req, res);
+  }
+
 }
 
 export default new ScoreController();

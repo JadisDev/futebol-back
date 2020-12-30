@@ -25,5 +25,6 @@ routes.post('/api/games', GameController.store);
 //scores
 routes.get('/api/score/gols', ScoreController.scoreGols);
 routes.get('/api/score/victories', ScoreController.scoreVictories);
+routes.get('/api/score/frequencies', ScoreController.scoreFrequencies);
 
 export default routes;

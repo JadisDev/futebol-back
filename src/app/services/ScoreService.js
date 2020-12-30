@@ -27,6 +27,18 @@ class ScoreService {
     }
   }
 
+  async scoreFrequency(req, res) {
+    try {
+      const aggregate = await ScoreAggregate.confCount(req.group);
+      const data = await Game.aggregate(
+        aggregate
+      ).sort({ total: -1 });
+      return res.json(data);
+    } catch (err) {
+      return res.status(400).json({ error: err.message });
+    }
+  }
+
 }
 
 export default new ScoreService();
